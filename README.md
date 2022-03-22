@@ -1,2 +1,2 @@
-# firebase-auth
-Firebase Authentication
+# Authentication
+Authentication
