@@ -2,7 +2,13 @@ import React from 'react'
 import {useFormik} from 'formik'
 
 function YouTubeForm() {
-  const formik = useFormik({})
+  const formik = useFormik({
+    initialValues:{
+      name:'',
+      email:'',
+      channel:''
+    }
+  })
   return (
     <div>
         <form>
