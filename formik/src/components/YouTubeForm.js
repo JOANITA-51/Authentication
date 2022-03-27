@@ -1,5 +1,5 @@
 import React from 'react'
-import {useFormik} from 'formik'
+import {Formik, useFormik} from 'formik'
 
 
 const initialValues = {
@@ -19,7 +19,7 @@ const validate =  values =>{
   }
   if (!values.email){
     errors.email = 'Email is required'
-  }else if(! /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/){
+  }else if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(values.email)){
     errors.email='Invalid email format'
   }
   if (!values.channel){
@@ -39,16 +39,26 @@ function YouTubeForm() {
   return (
     <div>
         <form onSubmit={formik.handleSubmit}>
+          <div className='form-control'>
             <label htmlFor="name">Name</label>
             <input type="text" id='name' name='name' onChange={formik.handleChange} values={formik.values.name}/>
+            {formik.errors.name? <div className='error'>{formik.errors.name}</div> : null}
+          </div>
 
+          <div  className='form-control'>
             <label htmlFor="channel">Email</label>
             <input type="email" id='email' name='email' onChange={formik.handleChange} values={formik.values.email}/>
-
+            {formik.errors.email? <div className='error'>{formik.errors.email}</div> : null}
+          </div>
+            
+          <div  className='form-control'>
             <label htmlFor="channel">Channel</label>
             <input type="text" id='channel' name='channel' onChange={formik.handleChange} values={formik.values.channel}/>
+            {formik.errors.channel? <div className='error'>{formik.errors.channel}</div> : null}
+          </div>  
 
-            <button>Submit</button>
+           
+          <button>Submit</button>
         
         </form>
         
