@@ -7,13 +7,16 @@ function YouTubeForm() {
       name:'',
       email:'',
       channel:''
+    },
+    onSubmit: values =>{
+      console.log('Form data', values)
     }
   })
 
   console.log('formik values', formik.values)
   return (
     <div>
-        <form>
+        <form onSubmit={formik.handleSubmit}>
             <label htmlFor="name">Name</label>
             <input type="text" id='name' name='name' onChange={formik.handleChange} values={formik.values.name}/>
 
