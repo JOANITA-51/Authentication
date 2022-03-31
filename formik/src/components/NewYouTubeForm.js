@@ -40,7 +40,11 @@ function NewYouTubeForm() {
           <div  className='form-control'>
             <label htmlFor="channel">Email</label>
             <Field type="email" id='email' name='email'/>
-            <ErrorMessage name='email'/>
+            <ErrorMessage name='email'>
+                {
+                    errorMsg => <div className='error'>{errorMsg}</div>
+                }
+            </ErrorMessage>
           </div>
             
           <div  className='form-control'>
