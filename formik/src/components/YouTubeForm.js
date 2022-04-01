@@ -1,5 +1,5 @@
 import React from 'react'
-import {Formik, Form, Field, ErrorMessage} from 'formik'
+import {Formik, Form, Field, ErrorMessage, FieldArray} from 'formik'
 import * as Yup from 'yup'
 import TextError from './TextError'
 
@@ -14,7 +14,9 @@ const initialValues = {
       facebook:'',
       twitter:''
   },
-  phoneNumbers: ['' , '']
+  phoneNumbers: ['' , ''],
+  phoneNumbers2:['']
+
 }
 
 const onSubmit =  values =>{
@@ -100,6 +102,33 @@ function YouTubeForm() {
             <div className='form-control'>
                 <label htmlFor="secondaryPh">Secondary Phone Number</label>
                 <Field name='phoneNumbers[1]' type='text' id='secondaryPh'/>
+            </div>
+
+            <div>
+            <label > List of Phone Numbers</label>  
+            <FieldArray name='phoneNumbers2'>
+              {
+                (fieldArrayProps)=>{
+                  const {push, remove, form} = fieldArrayProps
+                  const {values} = form
+                  const {phoneNumbers2} = values
+                  return(
+                    <div>
+                      {phoneNumbers2.map((phoneNumber, index)=>( 
+                        <div key={index}>
+                          <Field name={`phoneNumbers2[${index}]`}/>
+                          {
+                            index>0 && <button type='button' onClick={()=> remove(index)}>-</button>
+                          }
+                          
+                          <button type='button' onClick={()=> push('')}>+</button>
+                        </div>
+                      ))}
+                    </div>
+                  )
+                }
+              }
+            </FieldArray>
             </div> 
            
           <button>Submit</button>
